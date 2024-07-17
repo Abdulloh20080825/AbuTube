@@ -9,6 +9,7 @@ import {
 import React from "react";
 import { colors } from "../../constants/colors";
 import moment from "moment";
+import { Link } from "react-router-dom";
 
 const VideoCard = ({ video }) => {
   return (
@@ -19,14 +20,16 @@ const VideoCard = ({ video }) => {
         borderRadius: 0,
       }}
     >
-      <CardMedia
-        image={video?.snippet?.thumbnails?.high?.url}
-        alt={video?.title}
-        sx={{
-          width: { xs: "100%", sm: "360px", md: "320px" },
-          height: "180px",
-        }}
-      />
+      <Link to={`/video/${video?.id?.videoId}`}>
+        <CardMedia
+          image={video?.snippet?.thumbnails?.high?.url}
+          alt={video?.title}
+          sx={{
+            width: { xs: "100%", sm: "360px", md: "320px" },
+            height: "180px",
+          }}
+        />
+      </Link>
       <CardContent
         sx={{
           background: colors.primary,
@@ -34,7 +37,7 @@ const VideoCard = ({ video }) => {
           position: "relative",
         }}
       >
-        <>
+        <Link to={`/video/${video.id.videoId}`}>
           <Typography sx={{ opacity: 0.4 }} my={"5px"}>
             {moment(video?.snippet?.publishedAt).fromNow()}
           </Typography>
@@ -44,8 +47,8 @@ const VideoCard = ({ video }) => {
           <Typography variant="subtitle2" sx={{ opacity: 0.6 }}>
             {video?.snippet?.description.slice(0, 70)}
           </Typography>
-        </>
-        <>
+        </Link>
+        <Link to={`/channel/${video?.snippet?.channelId}`}>
           <Stack
             direction={"row"}
             position={"absolute"}
@@ -61,7 +64,7 @@ const VideoCard = ({ video }) => {
               {video?.snippet?.channelTitle}
             </Typography>
           </Stack>
-        </>
+        </Link>
       </CardContent>
     </Card>
   );

@@ -3,7 +3,7 @@ import React from "react";
 import { VideoCard, ChannelCard, Loader } from "../";
 
 const Videos = ({ videos }) => {
-  if (!videos.length) return <Loader />;
+  if (!videos?.length) return <Loader />;
   return (
     <Stack
       width={"100%"}
